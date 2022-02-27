@@ -79,11 +79,22 @@ const questions = [
 function writeToFile(fileName, data) {}
 fs.writeFile('README.md',dataPlaceHolder), err => {
     if(err) throw err;
-    console.log('Your README has now been generated and can be found at README.md.');
+    console.log('Your README has now been generated and can be found in the dist folder.');
 };
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer.prompt(questions)
+    .then (answers => generateMarkdown(answers))
+    .then (markdownData => {
+        writeToFile('../dist/README.md', markdownData, err => {
+            if (err) {
+                console.log(err);
+            }
+            console.log('Your inputs have been written to a new README file. Check the dist folder to find the README.md file you created!');
+        })
+    })
+}
 
 // Function call to initialize app
 init();
