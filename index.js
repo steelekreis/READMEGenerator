@@ -91,7 +91,7 @@ function init() {
     inquirer.prompt(questions)
     .then (answers => generateMarkdown(answers))
     .then (markdownData => {
-        writeToFile('./dist/README.md', markdownData, err => {
+        writeToFile('./output/README.md', markdownData, err => {
             if (err) {
                 console.log(err);
             }
