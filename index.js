@@ -76,18 +76,22 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-fs.writeFile('README.md',dataPlaceHolder), err => {
-    if(err) throw err;
-    console.log('Your README has now been generated and can be found in the dist folder.');
-};
+function writeToFile(fileName, data) {
+    // Generate the actual README file that pulls data
+    fs.writeFile(fileName, data, err => {
+            if(err) {
+                console.log(err);;
+            };
+            console.log('Your README has now been generated and can be found in the dist folder.');
+        });
+}
 
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
     .then (answers => generateMarkdown(answers))
     .then (markdownData => {
-        writeToFile('../dist/README.md', markdownData, err => {
+        writeToFile('./dist/README.md', markdownData, err => {
             if (err) {
                 console.log(err);
             }
